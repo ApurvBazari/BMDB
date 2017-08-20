@@ -33,10 +33,29 @@ export default class extends React.Component {
 				<Head>
 					<title>BMDB</title>
 					<a><link href="./movieCard.css" rel="stylesheet" /></a>
+					<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
 				</Head>
+				<div className="appHeader">
+				<h1>BMDB</h1>
+				<select className="filter">
+					<option>Rating: High</option>
+					<option>Rating: Low</option>
+					<option>Popularity: High</option>
+					<option>Popularity: Low</option>
+				</select>
+				<select className="year">
+					<option>2010</option>
+					<option>2011</option>
+					<option>2012</option>
+					<option>2013</option>
+					<option>2014</option>
+					<option>2015</option>
+					<option>2016</option>
+					<option>2017</option>
+				</select>
 				<Link href="/favourites">favourites</Link>
-					<div className="gallery">
-						<h1>BMDB</h1>
+				</div>
+					<div className="gallery"> 
 						<div>
 							{this.props.data.results.map((movie, i) => {
 								return (
@@ -45,6 +64,20 @@ export default class extends React.Component {
 							})}
 						</div>
 					</div>
+				<style jsx>{`
+					.filter {
+						padding: 10px;
+					}
+
+					.year {
+						padding: 10px;
+					}
+
+					.appHeader {
+						padding: 10px;
+						background: blue;
+					}
+				`}</style>
 				</div>
 		)
 	}

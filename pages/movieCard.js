@@ -22,7 +22,16 @@ class MovieCard extends React.Component {
       <div className="movieCard">
         <img className="movieImage" alt={this.props.movie.title} src={this.getImage(this.props.movie.poster_path)} />
         <div className="imageTitle">
+          <p className="language">{this.props.movie.original_language}</p>
           <p className="title">{this.props.movie.title}</p>
+        </div>
+        <div className="imageHeader">
+          <i className="releaseDate">{this.props.movie.release_date}</i>
+          <div className="icons">
+            <i className="fa fa-heart" aria-hidden="true"></i>
+            <i className="fa fa-star" aria-hidden="true"></i>
+            <i className="fa fa-comment" aria-hidden="true"></i>
+          </div>
         </div>
         <style jsx>{`
           .movieCard {
@@ -51,11 +60,35 @@ class MovieCard extends React.Component {
             width:100%;
             color:white;
             opacity:0.6;
+            padding:5px;
           }
+
+          .icons {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            padding: 5px;
+          }
+
+          .releaseDate {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            padding: 5px;
+          }
+
+          .fa {
+            padding:3px;
+          }
+
+          .language {
+            font-size: 14px;
+            font-variant: small-caps
+          }
+
           .title { 
-            padding:10px;
             margin:0px;
-            font-size: 30px;
+            font-size: 20px;
           }  
         `}</style>
 
