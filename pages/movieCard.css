@@ -1,0 +1,20 @@
+.header {
+    padding: 15px;
+    text-align: center;
+}
+
+.movieCard img {
+	width: 100%;
+	height: auto;
+}
+
+.movieCard {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+.movieCard img:hover {
+	border: 1px solid #777;
+}
