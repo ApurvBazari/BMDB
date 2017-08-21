@@ -32,7 +32,6 @@ export default class extends React.Component {
 			<div>
 				<Head>
 					<title>BMDB</title>
-					<a><link href="./movieCard.css" rel="stylesheet" /></a>
 					<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
 				</Head>
 				<div className="appHeader">
