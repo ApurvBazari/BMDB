@@ -29,8 +29,9 @@ class MovieCard extends React.Component {
           <i className="releaseDate">{this.props.movie.release_date}</i>
           <div className="icons">
             <i className="fa fa-heart" aria-hidden="true"></i>
-            <i className="fa fa-star" aria-hidden="true"></i>
             <i className="fa fa-comment" aria-hidden="true"></i>
+            <i className="fa fa-star" aria-hidden="true"></i>
+            <i className="vote_count">{this.props.movie.vote_count}</i>
           </div>
         </div>
         <style jsx>{`
