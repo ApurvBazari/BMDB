@@ -1,13 +1,9 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {addFavourite} from '../actions/addfavourite'
 
 class MovieCard extends React.Component { 
-  // static async getInitialProps() {
-  //   const res = await axios.get(`https://image.tmdb.org/t/p/w300${this.props.movie.poster_path}`);
-  //   return {
-  //     image: res.data
-  //   }
-  // }
-
   constructor(props) {
     super(props);
     this.getImage = this.getImage.bind(this);
@@ -17,9 +13,15 @@ class MovieCard extends React.Component {
     return `https://image.tmdb.org/t/p/w300${imagePath}`;
   }
 
+  handleLike = () => {
+    console.log(this.props)
+    this.props.addFavourite(this.props.movie.id);
+  }
+
   render () {
+    console.log(this.props);
     return (
-      <div className="movieCard">
+      <div className="movieCard" key={this.props.key}>
         <img className="movieImage" alt={this.props.movie.title} src={this.getImage(this.props.movie.poster_path)} />
         <div className="imageTitle">
           <p className="language">{this.props.movie.original_language}</p>
@@ -28,7 +30,7 @@ class MovieCard extends React.Component {
         <div className="imageHeader">
           <i className="releaseDate">{this.props.movie.release_date}</i>
           <div className="icons">
-            <i className="fa fa-heart" aria-hidden="true"></i>
+            <i className="fa fa-heart" aria-hidden="true" onClick={this.handleLike}></i>
             <i className="fa fa-comment" aria-hidden="true"></i>
             <i className="fa fa-star" aria-hidden="true"></i>
             <i className="vote_count">{this.props.movie.vote_count}</i>
@@ -97,4 +99,11 @@ class MovieCard extends React.Component {
     );
   }
 }
-export default MovieCard;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addFavourite: bindActionCreators(addFavourite, dispatch)
+  }
+}
+
+export default connect(state => state, mapDispatchToProps)(MovieCard);
