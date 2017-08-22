@@ -4,6 +4,6 @@ import Link from 'next/link'
 export default () => (
 	<div>
 		<p>In development process!!</p>
-		<Link href="/">Goto Home</Link>
+		<Link href="/"><a>Goto Home</a></Link>
 	</div>
 )
