@@ -2,6 +2,6 @@
 Sample BMDB app using nextjs
 
 
-npm install
-npm build
-npm start
+<p>npm install</p>
+<p>npm run build</p>
+<p>npm run start</p>
