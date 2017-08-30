@@ -4,7 +4,9 @@ import thunkMiddleware from 'redux-thunk'
 import reducers from './reducers'
 
 const exampleInitialState = {
-  items: []
+  items: [],
+  itemsHasErrored: false,
+  itemsIsLoading: true
 }
 
 export const initStore = (initialState = exampleInitialState) => {
