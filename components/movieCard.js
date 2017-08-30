@@ -71,6 +71,7 @@ class MovieCard extends React.Component {
             right: 0px;
             padding: 5px;
             font-size: 12px;
+            color: white;
           }
 
           .releaseDate {
@@ -78,6 +79,7 @@ class MovieCard extends React.Component {
             top: 0px;
             left: 0px;
             padding: 5px;
+            color: white;
           }
 
           .fa {

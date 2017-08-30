@@ -20,7 +20,9 @@ var _reducers2 = _interopRequireDefault(_reducers);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var exampleInitialState = {
-  items: []
+  items: [],
+  itemsHasErrored: false,
+  itemsIsLoading: true
 };
 
 var initStore = exports.initStore = function initStore() {
