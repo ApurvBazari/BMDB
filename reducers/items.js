@@ -17,6 +17,7 @@ export const itemsIsLoading = (state = false, action) => {
 }
 
 export const items = (state = [], action) => {
+    //sconsole.log(action.items);
     switch (action.type) {
         case 'ITEMS_FETCH_DATA_SUCCESS':
             return Object.assign({}, state, {items: action.items});

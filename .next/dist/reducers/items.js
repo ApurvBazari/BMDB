@@ -39,6 +39,7 @@ var items = exports.items = function items() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var action = arguments[1];
 
+    //sconsole.log(action.items);
     switch (action.type) {
         case 'ITEMS_FETCH_DATA_SUCCESS':
             return (0, _assign2.default)({}, state, { items: action.items });

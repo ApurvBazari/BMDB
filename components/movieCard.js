@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 import {addFavourite} from '../actions/addfavourite'
 
 class MovieCard extends React.Component { 
@@ -102,10 +101,5 @@ class MovieCard extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addFavourite: bindActionCreators(addFavourite, dispatch)
-  }
-}
 
-export default connect(state => state, mapDispatchToProps)(MovieCard);
+export default connect(state => state, null)(MovieCard);
