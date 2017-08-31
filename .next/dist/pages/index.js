@@ -4,6 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -40,6 +48,8 @@ var _homePage = require('../components/homePage.js');
 
 var _homePage2 = _interopRequireDefault(_homePage);
 
+var _items = require('../actions/items.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/home/apurv/Desktop/BMDB/pages/index.js?entry';
@@ -55,22 +65,77 @@ var Counter = function (_React$Component) {
   }
 
   (0, _createClass3.default)(Counter, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var res = this.props.itemsFetchData('https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}');
+      console.log(res);
+      return {
+        res: res
+      };
+    }
+  }, {
     key: 'render',
     value: function render() {
+      console.log(this.props);
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 10
+          lineNumber: 30
         }
       }, 'Hello', _react2.default.createElement(_homePage2.default, { linkTo: '/homePage', __source: {
           fileName: _jsxFileName,
-          lineNumber: 12
+          lineNumber: 32
         }
       }));
     }
+  }], [{
+    key: 'getInitialProps',
+    value: function () {
+      var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(_ref) {
+        var store = _ref.store,
+            isServer = _ref.isServer;
+        return _regenerator2.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return store.dispatch((0, _items.itemsFetchData)('https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}'));
+
+              case 2:
+                console.log(store.getState());
+                return _context.abrupt('return', {
+                  isServer: isServer
+                });
+
+              case 4:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getInitialProps(_x) {
+        return _ref2.apply(this, arguments);
+      }
+
+      return getInitialProps;
+    }()
   }]);
 
   return Counter;
 }(_react2.default.Component);
 
-exports.default = (0, _nextReduxWrapper2.default)(_store.initStore, null, null)(Counter);
+/*const mapDispatchToProps = (dispatch) => {
+	return {
+		itemsFetchData: bindActionCreators(itemsFetchData, dispatch)	
+	}
+}
+*/
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return (0, _redux.bindActionCreators)({
+    itemsFetchData: _items.itemsFetchData
+  }, dispatch);
+};
+exports.default = (0, _nextReduxWrapper2.default)(_store.initStore, null, mapDispatchToProps)(Counter);

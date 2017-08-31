@@ -1,7 +1,6 @@
 import React from 'react'
-import {bindActionCreators} from 'redux'
 import {initStore} from '../store.js'
-import {itemsfetchData} from '../actions/items'
+import {itemsFetchData} from '../actions/items'
 
 import withRedux from 'next-redux-wrapper'
 import {connect} from 'react-redux'
@@ -13,23 +12,8 @@ import MovieCard from '../components/movieCard'
 
 class HomePage extends React.Component {
 
-	static async getInitialProps({ store, isServer }) {
-		store.dispatch(fetchData('https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}'));
-		if(!process.browser) {
-			//const res = await axios.get('https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}');
-			store.dispatch(fetchData('https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}'));
-			//const res = this.props.fetchData('https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}')
-			return {
-				data: res,
-				servingFrom: 'server'
-			}
-		} else {
-			const data = JSON.parse(sessionStorage.getItem('movieList'));
-			return {
-				data: data,
-				servingFrom: 'sessionStorage'
-			}
-		}
+	constructor (props) {
+		super(props);
 	}
 
 	handleSearch = () => {
@@ -44,7 +28,6 @@ class HomePage extends React.Component {
 
 	render() {
 		console.log(this.props);
-		console.log(this.state);
 		return (
 			<div className="app">
 				<Head>
@@ -79,7 +62,7 @@ class HomePage extends React.Component {
 				</div>
 				<div className="gallery"> 
 					<div>
-						{this.props.items.map((movie, i) => {
+						{this.props.items.items.results.map((movie, i) => {
 							return (
 								<MovieCard movie={movie} key={i}/>
 							)
@@ -141,10 +124,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		fetchData: (url) => bindActionCreators(itemsfetchData, dispatch)	
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, null)(HomePage);
