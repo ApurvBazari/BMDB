@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import {fetchReducer} from './fetchData'
-import {addFavourite} from './likeReducer'
+import {items, itemsHasErrored, itemsIsLoading} from './items'
 
 export default combineReducers({
-	fetchReducer,
-	addFavourite
+	items,
+	itemsHasErrored,
+	itemsIsLoading
 });
 

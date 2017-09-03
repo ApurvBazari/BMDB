@@ -6,11 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = require('redux');
 
-var _fetchData = require('./fetchData');
-
-var _likeReducer = require('./likeReducer');
+var _items = require('./items');
 
 exports.default = (0, _redux.combineReducers)({
-	fetchReducer: _fetchData.fetchReducer,
-	addFavourite: _likeReducer.addFavourite
+	items: _items.items,
+	itemsHasErrored: _items.itemsHasErrored,
+	itemsIsLoading: _items.itemsIsLoading
 });
