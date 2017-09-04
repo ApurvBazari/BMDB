@@ -1,8 +1,7 @@
-import {LIKE_MOVIE} from '../actionTypes.js'
-
 export const addFavourite = (id) => dispatch => {
+	debugger
 	return dispatch({
-		type: LIKE_MOVIE,
+		type: 'LIKE_MOVIE',
 		id: id
-	})
+	});
 }

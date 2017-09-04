@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addFavourite} from '../actions/addfavourite'
+import { bindActionCreators } from 'redux'
 
 class MovieCard extends React.Component { 
   constructor(props) {
@@ -13,12 +14,12 @@ class MovieCard extends React.Component {
   }
 
   handleLike = () => {
-    console.log(this.props)
+    console.log(this.props);
     this.props.addFavourite(this.props.movie.id);
+    console.log(this);
   }
 
   render () {
-    console.log(this.props);
     return (
       <div className="movieCard" key={this.props.key}>
         <img className="movieImage" alt={this.props.movie.title} src={this.getImage(this.props.movie.poster_path)} />
@@ -101,5 +102,16 @@ class MovieCard extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addFavourite: bindActionCreators(addFavourite, dispatch)
+  }
+}
 
-export default connect(state => state, null)(MovieCard);
+const mapStateToProps = (state) => {
+    return {
+      favourites: state.addFavourite
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCard);

@@ -6,7 +6,7 @@ import reducers from './reducers/index.js'
 const exampleInitialState = {
   items: [],
   itemsHasErrored: false,
-  itemsIsLoading: true
+  itemsIsLoading: false
 }
 
 export const initStore = (initialState = exampleInitialState) => {

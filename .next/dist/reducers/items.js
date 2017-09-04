@@ -17,7 +17,7 @@ var itemsHasErrored = exports.itemsHasErrored = function itemsHasErrored() {
 
     switch (action.type) {
         case 'ITEMS_HAS_ERRORED':
-            return (0, _assign2.default)({}, state, { action: action.hasErrored });
+            return (0, _assign2.default)({}, state, action.hasErrored);
         default:
             return state;
     }
@@ -29,7 +29,7 @@ var itemsIsLoading = exports.itemsIsLoading = function itemsIsLoading() {
 
     switch (action.type) {
         case 'ITEMS_IS_LOADING':
-            return (0, _assign2.default)({}, state, { action: action.isLoading });
+            return (0, _assign2.default)({}, state, action.isLoading);
         default:
             return state;
     }
@@ -39,10 +39,9 @@ var items = exports.items = function items() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var action = arguments[1];
 
-    //sconsole.log(action.items);
     switch (action.type) {
         case 'ITEMS_FETCH_DATA_SUCCESS':
-            return (0, _assign2.default)({}, state, { items: action.items });
+            return (0, _assign2.default)({}, state, action.items);
         default:
             return state;
     }

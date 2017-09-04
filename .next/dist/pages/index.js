@@ -50,6 +50,8 @@ var _homePage2 = _interopRequireDefault(_homePage);
 
 var _items = require('../actions/items.js');
 
+var _addfavourite = require('../actions/addfavourite.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/home/apurv/Desktop/BMDB/pages/index.js?entry';
@@ -65,26 +67,16 @@ var Counter = function (_React$Component) {
   }
 
   (0, _createClass3.default)(Counter, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var res = this.props.itemsFetchData('https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}');
-      console.log(res);
-      return {
-        res: res
-      };
-    }
-  }, {
     key: 'render',
     value: function render() {
-      console.log(this.props);
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 30
+          lineNumber: 20
         }
-      }, 'Hello', _react2.default.createElement(_homePage2.default, { linkTo: '/homePage', __source: {
+      }, _react2.default.createElement(_homePage2.default, { linkTo: '/homePage', __source: {
           fileName: _jsxFileName,
-          lineNumber: 32
+          lineNumber: 21
         }
       }));
     }
@@ -102,12 +94,11 @@ var Counter = function (_React$Component) {
                 return store.dispatch((0, _items.itemsFetchData)('https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}'));
 
               case 2:
-                console.log(store.getState());
                 return _context.abrupt('return', {
                   isServer: isServer
                 });
 
-              case 4:
+              case 3:
               case 'end':
                 return _context.stop();
             }
@@ -126,16 +117,11 @@ var Counter = function (_React$Component) {
   return Counter;
 }(_react2.default.Component);
 
-/*const mapDispatchToProps = (dispatch) => {
-	return {
-		itemsFetchData: bindActionCreators(itemsFetchData, dispatch)	
-	}
-}
-*/
-
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return (0, _redux.bindActionCreators)({
-    itemsFetchData: _items.itemsFetchData
-  }, dispatch);
+  return {
+    itemsFetchData: (0, _redux.bindActionCreators)(_items.itemsFetchData, dispatch),
+    addFavourite: (0, _redux.bindActionCreators)(_addfavourite.addFavourite, dispatch)
+  };
 };
+
 exports.default = (0, _nextReduxWrapper2.default)(_store.initStore, null, mapDispatchToProps)(Counter);

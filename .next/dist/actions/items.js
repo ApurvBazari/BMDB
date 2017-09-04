@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.itemsFetchData = exports.errorAfterFiveSeconds = exports.itemsFetchDataSuccess = exports.itemsIsLoading = exports.itemsHasErrored = undefined;
+exports.itemsFetchData = exports.itemsFetchDataSuccess = exports.itemsIsLoading = exports.itemsHasErrored = undefined;
 
 var _isomorphicFetch = require('isomorphic-fetch');
 
@@ -22,6 +22,7 @@ var itemsHasErrored = exports.itemsHasErrored = function itemsHasErrored(bool) {
 
 var itemsIsLoading = exports.itemsIsLoading = function itemsIsLoading(bool) {
     return function (dispatch) {
+        console.log('Items is laoding!!', bool);
         return dispatch({
             type: 'ITEMS_IS_LOADING',
             isLoading: bool
@@ -38,41 +39,21 @@ var itemsFetchDataSuccess = exports.itemsFetchDataSuccess = function itemsFetchD
     };
 };
 
-var errorAfterFiveSeconds = exports.errorAfterFiveSeconds = function errorAfterFiveSeconds() {
-    return function (dispatch) {
-        // We return a const instead =  of  =>an action object
-        return function (dispatch) {
-            setTimeout(function () {
-                // This const is able =  to  =>dispatch other action creators
-                dispatch(itemsHasErrored(true));
-            }, 5000);
-        };
-    };
-};
-
 var itemsFetchData = exports.itemsFetchData = function itemsFetchData(url) {
     return function (dispatch) {
-        return (0, _isomorphicFetch2.default)('https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}').then(function (response) {
+        dispatch(itemsIsLoading(true));
+        return (0, _isomorphicFetch2.default)(url).then(function (response) {
+            dispatch(itemsIsLoading(false));
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response;
+        }).then(function (response) {
             return response.json();
-        }).then(function (item) {
-            return dispatch({
-                type: 'ITEMS_FETCH_DATA_SUCCESS',
-                items: item
-            });
+        }).then(function (items) {
+            return dispatch(itemsFetchDataSuccess(items));
+        }).catch(function () {
+            return dispatch(itemsHasErrored(true));
         });
-        /*return (dispatch) => {
-            dispatch(itemsIsLoading(true));
-            fetch('https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}')
-                .then((response) => {
-                    if (!response.ok) {
-                        throw Error(response.statusText);
-                    }
-                    dispatch(itemsIsLoading(false));
-                    return response;
-                })
-                .then((response) => response.json())
-                .then((items) => dispatch(itemsFetchDataSuccess(items)))
-                .catch(() => dispatch(itemsHasErrored(true)))
-        };*/
     };
 };

@@ -22,7 +22,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var exampleInitialState = {
   items: [],
   itemsHasErrored: false,
-  itemsIsLoading: true
+  itemsIsLoading: false
 };
 
 var initStore = exports.initStore = function initStore() {

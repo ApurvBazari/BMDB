@@ -1,11 +1,8 @@
 import React from 'react'
-import {initStore} from '../store.js'
 import {itemsFetchData} from '../actions/items'
 
-import withRedux from 'next-redux-wrapper'
 import {connect} from 'react-redux'
 import Head from 'next/head'
-import axios from 'axios'
 import Link from 'next/link'
 
 import MovieCard from '../components/movieCard'
@@ -62,7 +59,7 @@ class HomePage extends React.Component {
 				</div>
 				<div className="gallery"> 
 					<div>
-						{this.props.items.items.results.map((movie, i) => {
+						{this.props.items.results.map((movie, i) => {
 							return (
 								<MovieCard movie={movie} key={i}/>
 							)
