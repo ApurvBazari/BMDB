@@ -14,9 +14,13 @@ class MovieCard extends React.Component {
   }
 
   handleLike = () => {
+    debugger
     console.log(this.props);
-    this.props.addFavourite(this.props.movie.id);
-    console.log(this);
+    let favouriteIds = localStorage.getItem("favouriteIds") ? JSON.parse(localStorage.getItem("favouriteIds")) : [];
+    favouriteIds[favouriteIds ? favouriteIds.length : 0] = this.props.movie.id;
+    localStorage.setItem("favouriteIds", JSON.stringify(favouriteIds));
+    this.props.addFavourite(favouriteIds);
+    console.log(localStorage);
   }
 
   render () {

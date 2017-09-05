@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 export const addFavourite = (state=null, action) => {
 	debugger
 	switch (action.type) {

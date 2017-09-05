@@ -5,6 +5,7 @@ import withRedux from 'next-redux-wrapper'
 import HomePage from '../components/homePage.js'
 import {itemsFetchData} from '../actions/items.js'
 import {addFavourite} from '../actions/addfavourite.js'
+import Favourites from '../components/favourites.js'
 
 class Counter extends React.Component {
 
@@ -18,7 +19,8 @@ static async getInitialProps({store, isServer}) {
 render () {
     return (
        <div>
-       	<HomePage linkTo='/homePage'/>
+       	<HomePage linkTo='/'/>
+        <Favourites linkTo='/favourites' />
        </div>
     )
   }

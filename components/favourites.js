@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import {connect} from 'react-redux'\
+import {connect} from 'react-redux'
 
 class Favourites extends React.Component {
 	constructor(props) {
@@ -19,10 +19,3 @@ class Favourites extends React.Component {
 }
 
 export default connect(null, null)(Favourites);
-/*
-export default () => (
-	<div>
-		<p>In development process!!</p>
-		<Link href="/">Goto Home</Link>
-	</div>
-)*/
