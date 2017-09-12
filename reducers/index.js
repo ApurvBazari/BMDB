@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import {items, itemsHasErrored, itemsIsLoading} from './items'
-import {addFavourite} from './likeReducer.js'
+import {getFavourite} from './fetchFavourites.js'
 
 export default combineReducers({
 	items,
 	itemsHasErrored,
 	itemsIsLoading,
-	addFavourite
+	getFavourite
 });
 

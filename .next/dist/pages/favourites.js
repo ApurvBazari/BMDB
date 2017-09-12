@@ -4,9 +4,13 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
+var _regenerator = require('babel-runtime/regenerator');
 
-var _typeof3 = _interopRequireDefault(_typeof2);
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -28,15 +32,13 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+var _favourites = require('../components/favourites.js');
+
+var _favourites2 = _interopRequireDefault(_favourites);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
-
-var _link = require('next/dist/lib/link.js');
-
-var _link2 = _interopRequireDefault(_link);
-
-var _reactRedux = require('react-redux');
 
 var _store = require('../store');
 
@@ -44,63 +46,89 @@ var _nextReduxWrapper = require('next-redux-wrapper');
 
 var _nextReduxWrapper2 = _interopRequireDefault(_nextReduxWrapper);
 
-var _movieCard = require('../components/movieCard.js');
+var _fetchFavourite = require('../actions/fetchFavourite.js');
 
-var _movieCard2 = _interopRequireDefault(_movieCard);
+var _redux = require('redux');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/home/apurv/Desktop/BMDB/pages/favourites.js?entry';
 
 
-var Favourites = function (_React$Component) {
-	(0, _inherits3.default)(Favourites, _React$Component);
+var Favourite = function (_React$Component) {
+	(0, _inherits3.default)(Favourite, _React$Component);
 
-	function Favourites(props) {
-		(0, _classCallCheck3.default)(this, Favourites);
+	function Favourite() {
+		(0, _classCallCheck3.default)(this, Favourite);
 
-		var _this = (0, _possibleConstructorReturn3.default)(this, (Favourites.__proto__ || (0, _getPrototypeOf2.default)(Favourites)).call(this, props));
-
-		console.log(_this.props);
-		return _this;
+		return (0, _possibleConstructorReturn3.default)(this, (Favourite.__proto__ || (0, _getPrototypeOf2.default)(Favourite)).apply(this, arguments));
 	}
 
-	(0, _createClass3.default)(Favourites, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			if (typeof window === 'undefined' ? 'undefined' : (0, _typeof3.default)(window)) {
-				this.setState({
-					favouriteIds: JSON.parse(localStorage.getItem("favouriteIds"))
-				});
-			}
-		}
-	}, {
+	(0, _createClass3.default)(Favourite, [{
 		key: 'render',
 		value: function render() {
-			debugger;
-			var cards = this.props ? this.props.favouriteIds.forEach(function (movie) {
-				_react2.default.createElement(_movieCard2.default, { movie: movie, __source: {
-						fileName: _jsxFileName,
-						lineNumber: 25
-					}
-				});
-			}) : null;
+			//console.log(this, this.isServer);
 			return _react2.default.createElement('div', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 28
+					lineNumber: 21
 				}
-			}, cards);
+			}, _react2.default.createElement(_favourites2.default, { linkTo: '/favourites', __source: {
+					fileName: _jsxFileName,
+					lineNumber: 22
+				}
+			}));
 		}
+	}], [{
+		key: 'getInitialProps',
+		value: function () {
+			var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(_ref) {
+				var store = _ref.store,
+				    isServer = _ref.isServer;
+				return _regenerator2.default.wrap(function _callee$(_context) {
+					while (1) {
+						switch (_context.prev = _context.next) {
+							case 0:
+								if (isServer) {
+									_context.next = 3;
+									break;
+								}
+
+								_context.next = 3;
+								return store.dispatch((0, _fetchFavourite.getFavourite)());
+
+							case 3:
+								return _context.abrupt('return', {
+									isServer: isServer
+								});
+
+							case 4:
+							case 'end':
+								return _context.stop();
+						}
+					}
+				}, _callee, this);
+			}));
+
+			function getInitialProps(_x) {
+				return _ref2.apply(this, arguments);
+			}
+
+			return getInitialProps;
+		}()
 	}]);
 
-	return Favourites;
+	return Favourite;
 }(_react2.default.Component);
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	return {
-		favouriteIds: state.addFavourite.id
+		getFavourite: (0, _redux.bindActionCreators)(_fetchFavourite.getFavourite, dispatch)
 	};
 };
 
-exports.default = (0, _nextReduxWrapper2.default)(_store.initStore, mapStateToProps, null)(Favourites);
+exports.default = (0, _nextReduxWrapper2.default)(_store.initStore, function (state) {
+	return state;
+}, mapDispatchToProps)(Favourite);
+
+//export default Favourite;

@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addFavourite} from '../actions/addfavourite'
 import { bindActionCreators } from 'redux'
 
 class MovieCard extends React.Component { 
@@ -19,7 +18,6 @@ class MovieCard extends React.Component {
     let favouriteIds = localStorage.getItem("favouriteIds") ? JSON.parse(localStorage.getItem("favouriteIds")) : [];
     favouriteIds[favouriteIds ? favouriteIds.length : 0] = this.props.movie.id;
     localStorage.setItem("favouriteIds", JSON.stringify(favouriteIds));
-    this.props.addFavourite(favouriteIds);
     console.log(localStorage);
   }
 
@@ -106,16 +104,10 @@ class MovieCard extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addFavourite: bindActionCreators(addFavourite, dispatch)
-  }
-}
-
 const mapStateToProps = (state) => {
     return {
       favourites: state.addFavourite
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieCard);
+export default connect(mapStateToProps, null)(MovieCard);

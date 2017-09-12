@@ -27,18 +27,6 @@ class HomePage extends React.Component {
 		console.log(this.props);
 		return (
 			<div className="app">
-				<Head>
-					<title>BMDB</title>
-					<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-				</Head>
-				<div className="appHeader">
-					<img src="/static/logo.png"></img>
-					<div className="headerLinks">
-						<Link href="/favourites"><a className="link linkFavourite">FAVOURITES</a></Link>
-						<Link href="/"><a className="link linkPopular">POPULAR</a></Link>
-						<i className="fa fa-search" aria-hidden="true" onClick={this.handleSearch}></i>
-					</div>
-				</div>
 				<div className="headerBar">
 					<select className="select select-filter">
 						<option>Rating: High</option>

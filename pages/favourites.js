@@ -1,41 +1,36 @@
+import Favourites from '../components/favourites.js'
 import React from 'react'
-import Link from 'next/link'
-import {connect} from 'react-redux'
 import { initStore } from '../store'
 import withRedux from 'next-redux-wrapper'
-import MovieCard from '../components/movieCard.js'
+import {getFavourite} from '../actions/fetchFavourite.js'
+import { bindActionCreators } from 'redux'
 
-class Favourites extends React.Component {
-	constructor(props) {
-		super(props);
-		console.log(this.props);
-	}
-
-	componentDidMount() {
-		if (typeof window) {
-			this.setState({
-				favouriteIds: JSON.parse(localStorage.getItem("favouriteIds"))
-			})
+class Favourite extends React.Component {
+	static async getInitialProps({store, isServer}) {
+		if (!isServer) {
+			await store.dispatch(getFavourite())
+		}
+		return {
+			isServer
 		}
 	}
 
 	render() {
-		debugger
-		const cards = this.props ? this.props.favouriteIds.forEach((movie) => {
-					<MovieCard movie={movie}/>
-				}) : null
+		//console.log(this, this.isServer);
 		return (
 			<div>
-				{cards}
+				<Favourites linkTo='/favourites'/>
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = (state) => {
-    return {
-        favouriteIds: state.addFavourite.id,
-    };
-};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		getFavourite: bindActionCreators(getFavourite, dispatch)
+	}
+}
 
-export default withRedux(initStore, mapStateToProps, null)(Favourites)
+export default withRedux(initStore, state => state, mapDispatchToProps)(Favourite);
+
+//export default Favourite;
