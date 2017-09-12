@@ -18,7 +18,7 @@ var getFavourite = exports.getFavourite = function getFavourite() {
 	debugger;
 	switch (action.type) {
 		case 'FAVOURITE_MOVIES':
-			return (0, _assign2.default)({}, state, { ids: action.ids, isLiked: true });
+			return (0, _assign2.default)({}, state, { movies: action.movies, isLiked: true });
 
 		case 'DISLIKE_MOVIE':
 			var movieIdDislike = action.id;

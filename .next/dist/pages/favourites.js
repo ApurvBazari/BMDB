@@ -50,9 +50,13 @@ var _fetchFavourite = require('../actions/fetchFavourite.js');
 
 var _redux = require('redux');
 
+var _header = require('../components/header.js');
+
+var _header2 = _interopRequireDefault(_header);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/home/apurv/Desktop/BMDB/pages/favourites.js?entry';
+var _jsxFileName = '/Users/apurv/Desktop/BMDB/pages/favourites.js?entry';
 
 
 var Favourite = function (_React$Component) {
@@ -71,11 +75,15 @@ var Favourite = function (_React$Component) {
 			return _react2.default.createElement('div', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 21
+					lineNumber: 23
 				}
-			}, _react2.default.createElement(_favourites2.default, { linkTo: '/favourites', __source: {
+			}, _react2.default.createElement(_header2.default, { linkTo: '/', __source: {
 					fileName: _jsxFileName,
-					lineNumber: 22
+					lineNumber: 24
+				}
+			}), _react2.default.createElement(_favourites2.default, { linkTo: '/favourites', __source: {
+					fileName: _jsxFileName,
+					lineNumber: 25
 				}
 			}));
 		}

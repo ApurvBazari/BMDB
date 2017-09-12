@@ -6,11 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 var getFavourite = exports.getFavourite = function getFavourite() {
 	return function (dispatch) {
 		debugger;
-		var ids = localStorage.getItem('favouriteIds');
-		console.log(ids);
+		var movies = localStorage.getItem('favouriteMovies');
 		return dispatch({
 			type: 'FAVOURITE_MOVIES',
-			ids: ids
+			movies: movies
 		});
 	};
 };

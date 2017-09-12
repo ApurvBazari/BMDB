@@ -13,15 +13,35 @@ class MovieCard extends React.Component {
   }
 
   handleLike = () => {
-    debugger
-    console.log(this.props);
-    let favouriteIds = localStorage.getItem("favouriteIds") ? JSON.parse(localStorage.getItem("favouriteIds")) : [];
-    favouriteIds[favouriteIds ? favouriteIds.length : 0] = this.props.movie.id;
-    localStorage.setItem("favouriteIds", JSON.stringify(favouriteIds));
+    let favouriteMovies = localStorage.getItem("favouriteMovies") ? JSON.parse(localStorage.getItem("favouriteMovies")) : [];
+    favouriteMovies[favouriteMovies ? favouriteMovies.length : 0] = this.props.movie;
+    localStorage.setItem("favouriteMovies", JSON.stringify(favouriteMovies));
     console.log(localStorage);
   }
 
+  handleDisike = () => {
+    console.log('Dislike', this.props);
+    let favouriteMovies =localStorage.getItem('favouriteMovies') ? JSON.parse(localStorage.getItem('favouriteMovies')) : [];
+    let newList = [];
+    if (favouriteMovies) {
+      favouriteMovies.forEach((movie) => {
+        if (movie.id != this.props.movie.id) {
+          newList.push(movie);
+        }
+      });
+    }
+    //console.log(newList);
+    localStorage.setItem("favouriteMovies", JSON.stringify(newList));
+    this.props.handleDisike;
+  }
+
   render () {
+    let likeButton;
+      if (this.props.isLiked) {
+        likeButton = <i className="fa fa-heart-o fa-heart-like" aria-hidden="true" onClick={this.handleDisike}></i>
+      } else {
+        likeButton = <i className="fa fa-heart" aria-hidden="true" onClick={this.handleLike}></i>
+      }
     return (
       <div className="movieCard" key={this.props.key}>
         <img className="movieImage" alt={this.props.movie.title} src={this.getImage(this.props.movie.poster_path)} />
@@ -32,7 +52,7 @@ class MovieCard extends React.Component {
         <div className="imageHeader">
           <i className="releaseDate">{this.props.movie.release_date}</i>
           <div className="icons">
-            <i className="fa fa-heart" aria-hidden="true" onClick={this.handleLike}></i>
+            {likeButton}
             <i className="fa fa-comment" aria-hidden="true"></i>
             <i className="fa fa-star" aria-hidden="true"></i>
             <i className="vote_count">{this.props.movie.vote_count}</i>
@@ -86,6 +106,10 @@ class MovieCard extends React.Component {
 
           .fa {
             padding:3px;
+          }
+
+          .fa>fa-heart>fa-heart-like {
+            color: red;
           }
 
           .language {

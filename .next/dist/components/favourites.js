@@ -40,36 +40,49 @@ var _movieCard2 = _interopRequireDefault(_movieCard);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/home/apurv/Desktop/BMDB/components/favourites.js',
-    _this2 = undefined;
+var _jsxFileName = '/Users/apurv/Desktop/BMDB/components/favourites.js',
+    _this3 = undefined;
 
 var Favourites = function (_React$Component) {
 	(0, _inherits3.default)(Favourites, _React$Component);
 
 	function Favourites() {
+		var _ref;
+
+		var _temp, _this, _ret;
+
 		(0, _classCallCheck3.default)(this, Favourites);
 
-		return (0, _possibleConstructorReturn3.default)(this, (Favourites.__proto__ || (0, _getPrototypeOf2.default)(Favourites)).apply(this, arguments));
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
+
+		return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Favourites.__proto__ || (0, _getPrototypeOf2.default)(Favourites)).call.apply(_ref, [this].concat(args))), _this), _this.handleDislike = function () {
+			console.log('Disliked');
+			_this.render();
+		}, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
 	}
 
 	(0, _createClass3.default)(Favourites, [{
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			console.log(this);
 			return _react2.default.createElement('div', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 10
+					lineNumber: 15
 				}
 			}, _react2.default.createElement('p', {
 				__source: {
 					fileName: _jsxFileName,
-					lineNumber: 11
+					lineNumber: 16
 				}
-			}, 'Favourite Movies'), this.props.favouriteIds.map(function (movie, i) {
-				return _react2.default.createElement(_movieCard2.default, { movie: movie, key: i, __source: {
+			}, 'Favourite Movies'), this.props.favouriteMovies.map(function (movie, i) {
+				return _react2.default.createElement(_movieCard2.default, { movie: movie, key: i, isLiked: _this2.props.isLiked, handleDislike: _this2.handleDislike, __source: {
 						fileName: _jsxFileName,
-						lineNumber: 14
+						lineNumber: 19
 					}
 				});
 			}));
@@ -81,9 +94,9 @@ var Favourites = function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
 	debugger;
-	console.log(_this2);
+	console.log(_this3);
 	return {
-		favouriteIds: JSON.parse(state.getFavourite.ids),
+		favouriteMovies: JSON.parse(state.getFavourite.movies),
 		isLiked: state.getFavourite.isLiked
 	};
 };
