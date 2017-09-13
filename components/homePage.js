@@ -4,17 +4,31 @@ import {itemsFetchData} from '../actions/items'
 import {connect} from 'react-redux'
 import Head from 'next/head'
 import Link from 'next/link'
+import { bindActionCreators } from 'redux'
 
 import MovieCard from '../components/movieCard'
 
 class HomePage extends React.Component {
-
-	constructor (props) {
-		super(props);
+	onFilterChange = (e) => {
+		let value = e.target.value;
+		console.log('Value:', value);
+		let url;
+		if (value === 'rating') {
+			url = 'https://api.themoviedb.org/3/movie/top_rated?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=1';
+		} else if (value === 'popularity') {
+			url = 'https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}';
+		} else if (value === 'upcoming') {
+			url = 'https://api.themoviedb.org/3/movie/upcoming?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=1';
+		} else if (value === 'nowPlaying') {
+			url = 'https://api.themoviedb.org/3/movie/now_playing?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=1';
+		}
+		this.props.itemsFetchData(url);
 	}
 
-	handleSearch = () => {
-		console.log(this.props);
+	onDateChange = (e) => {
+		let value = e.target.value;
+		let url = `https://api.themoviedb.org/3/search/movie?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&query=m&year=${value}`;
+		this.props.itemsFetchData(url);
 	}
 
 	componentDidMount() {
@@ -28,21 +42,23 @@ class HomePage extends React.Component {
 		return (
 			<div className="app">
 				<div className="headerBar">
-					<select className="select select-filter">
-						<option>Rating: High</option>
-						<option>Rating: Low</option>
-						<option>Popularity: High</option>
-						<option>Popularity: Low</option>
+					<select className="select select-filter" onChange={this.onFilterChange}>
+						<option selected disabled>Filter By</option>
+						<option value="popularity" default>Popularity</option>
+						<option value="rating">Rating</option>
+						<option value="upcoming">Upcoming</option>
+						<option value="nowPlaying">Now Playing</option>
 					</select>
-					<select className="select select-year">
-						<option>2010</option>
-						<option>2011</option>
-						<option>2012</option>
-						<option>2013</option>
-						<option>2014</option>
-						<option>2015</option>
-						<option>2016</option>
-						<option>2017</option>
+					<select className="select select-year" onChange={this.onDateChange}>
+						<option selected disabled>Filter By Year</option>
+						<option value="2010">2010</option>
+						<option value="2011">2011</option>
+						<option value="2012">2012</option>
+						<option value="2013">2013</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+						<option value="2017">2017</option>
 					</select>
 				</div>
 				<div className="gallery"> 
@@ -109,4 +125,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, null)(HomePage);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		itemsFetchData: bindActionCreators(itemsFetchData, dispatch)
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

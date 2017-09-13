@@ -1,8 +1,19 @@
 import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import {itemsFetchData} from '../actions/items'
 
 class BMDBHeader extends React.Component{
+  handleSearch = (e) => {
+    console.log(e.target.value);
+    let value = e.target.value;
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&query=${value}&page=1&include_adult=false`;
+    this.props.itemsFetchData(url);
+  }
+
 	render () {
 		return(
 			<div>
@@ -65,4 +76,10 @@ class BMDBHeader extends React.Component{
 	}
 }
 
-export default BMDBHeader;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    itemsFetchData: bindActionCreators(itemsFetchData, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(BMDBHeader);

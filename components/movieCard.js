@@ -8,7 +8,7 @@ class MovieCard extends React.Component {
     this.getImage = this.getImage.bind(this);
   }
 
-  getImage(imagePath) {
+  getImage = (imagePath) => {
     return `https://image.tmdb.org/t/p/w300${imagePath}`;
   }
 

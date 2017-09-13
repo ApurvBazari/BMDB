@@ -21,8 +21,8 @@ class Favourite extends React.Component {
 		//console.log(this, this.isServer);
 		return (
 			<div>
-				<BMDBHeader linkTo ='/' />
-				<Favourites linkTo='/favourites'/>
+				<BMDBHeader />
+				<Favourites />
 			</div>
 		)
 	}

@@ -18,8 +18,8 @@ static async getInitialProps({store, isServer}) {
 render () {
     return (
        <div>
-        <BMDBHeader linkTo='/' />
-       	<HomePage linkTo='/' />
+        <BMDBHeader />
+       	<HomePage />
        </div>
     )
   }
