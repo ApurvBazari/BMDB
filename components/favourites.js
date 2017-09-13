@@ -4,9 +4,22 @@ import {connect} from 'react-redux'
 import MovieCard from '../components/movieCard'
 
 class Favourites extends React.Component {
+	constructor(props) {
+    	super(props);
+    	this.handleDislike = this.handleDislike.bind(this);
+  	}
+  	
 	handleDislike = () => {
 		console.log('Disliked');
 		this.render();
+	}
+
+	componentWillMount() {
+		console.log('Will mount');
+	}
+
+	componentDidMount() {
+		console.log('Did mount');
 	}
 
 	render() {

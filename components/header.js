@@ -7,15 +7,73 @@ import { bindActionCreators } from 'redux'
 import {itemsFetchData} from '../actions/items'
 
 class BMDBHeader extends React.Component{
+  constructor() {
+    super()
+    this.state = {
+      search: false,
+      inputValue: ''
+    }
+  }
+
+  toggleSearch = (e) => {
+    console.log(this.state);
+    this.setState({
+      search: this.state.search===false ? true : false  
+    });
+    this.render();
+  }
+
   handleSearch = (e) => {
-    console.log(e.target.value);
-    let value = e.target.value;
-    let url = `https://api.themoviedb.org/3/search/movie?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&query=${value}&page=1&include_adult=false`;
+    console.log(e.target.value)
+  }
+
+  handleInput = (e) => {
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&query=${e.target.value}&page=1&include_adult=false`
+    this.setState({
+      inputValue: e.target.value
+    });
     this.props.itemsFetchData(url);
   }
 
 	render () {
-		return(
+		let normalHeader = (
+      <div className="headerLinks">
+        <Link href="/favourites"><a className="link linkFavourite">FAVOURITES</a></Link>
+        <Link href="/"><a className="link linkPopular">POPULAR</a></Link>
+        <i className="fa fa-search" aria-hidden="true" onClick={this.toggleSearch}></i>
+        <style jsx>{`
+          .headerLinks {
+                  padding: 5px;
+                  position: absolute;
+                  right: 5px
+                }
+
+                .link {
+                  padding: 15px;
+                  color: white;
+                  font-size: 16px;
+                }
+        `}</style>
+      </div>
+    )
+
+    let searchHeader = (
+      <div className="headerLinks">
+        <input type="text" value={this.state.inputValue} placeholder="Search..." onChange={this.handleInput}></input>
+        <i className="fa fa-times" aria-hidden="true" onClick={this.toggleSearch}></i>
+        <style jsx>{`
+          .headerLinks {
+                  padding: 5px;
+                  position: absolute;
+                  right: 5px
+                }
+        `}</style>
+      </div>
+    )
+
+    let headerData = this.state.search ? searchHeader : normalHeader;
+    
+    return(
 			<div>
 				<Head>
           			<title>BMDB</title>
@@ -23,11 +81,7 @@ class BMDBHeader extends React.Component{
         		</Head>
         		<div className="appHeader">
           			<img src="/static/logo.png"></img>
-          			<div className="headerLinks">
-            			<Link href="/favourites"><a className="link linkFavourite">FAVOURITES</a></Link>
-    			        <Link href="/"><a className="link linkPopular">POPULAR</a></Link>
-            			<i className="fa fa-search" aria-hidden="true" onClick={this.handleSearch}></i>
-          			</div>
+                {headerData}
         		</div>
         		<style jsx>{`
           			.filter {
@@ -43,18 +97,6 @@ class BMDBHeader extends React.Component{
             			color: white;
             			display: flex;
             			padding: 10px;
-          			}
-
-          			.headerLinks {
-            			padding: 5px;
-            			position: absolute;
-            			right: 5px
-          			}
-
-          			.link {
-            			padding: 15px;
-            			color: white;
-            			font-size: 16px;
           			}
 
           			.fa {
