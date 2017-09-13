@@ -42,15 +42,15 @@ class HomePage extends React.Component {
 		return (
 			<div className="app">
 				<div className="headerBar">
-					<select className="select select-filter" onChange={this.onFilterChange}>
-						<option selected disabled>Filter By</option>
-						<option value="popularity" default>Popularity</option>
+					<select className="select select-filter" onChange={this.onFilterChange} value='filter'>
+						<option value="filter" disabled>Filter By</option>
+						<option value="popularity">Popularity</option>
 						<option value="rating">Rating</option>
 						<option value="upcoming">Upcoming</option>
 						<option value="nowPlaying">Now Playing</option>
 					</select>
-					<select className="select select-year" onChange={this.onDateChange}>
-						<option selected disabled>Filter By Year</option>
+					<select className="select select-year" onChange={this.onDateChange} value='dateFilter'>
+						<option value="dateFilter" disabled>Filter By Year</option>
 						<option value="2010">2010</option>
 						<option value="2011">2011</option>
 						<option value="2012">2012</option>
