@@ -23,12 +23,20 @@ class HomePage extends React.Component {
 			url = 'https://api.themoviedb.org/3/movie/now_playing?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=1';
 		}
 		this.props.itemsFetchData(url);
+		this.setState({
+			filterValue: value,
+			dateValue: 'dateFilter'
+		});
 	}
 
 	onDateChange = (e) => {
 		let value = e.target.value;
 		let url = `https://api.themoviedb.org/3/search/movie?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&query=m&year=${value}`;
 		this.props.itemsFetchData(url);
+		this.setState({
+			dateValue: value,
+			filterValue: 'filter'
+		});
 	}
 
 	componentDidMount() {
@@ -42,14 +50,14 @@ class HomePage extends React.Component {
 		return (
 			<div className="app">
 				<div className="headerBar">
-					<select className="select select-filter" onChange={this.onFilterChange} value='filter'>
+					<select className="select select-filter" onChange={this.onFilterChange} value={this.state ? this.state.filterValue : 'filter'}>
 						<option value="filter" disabled>Filter By</option>
 						<option value="popularity">Popularity</option>
 						<option value="rating">Rating</option>
 						<option value="upcoming">Upcoming</option>
 						<option value="nowPlaying">Now Playing</option>
 					</select>
-					<select className="select select-year" onChange={this.onDateChange} value='dateFilter'>
+					<select className="select select-year" onChange={this.onDateChange} value={this.state ? this.state.dateValue: 'dateFilter'}>
 						<option value="dateFilter" disabled>Filter By Year</option>
 						<option value="2010">2010</option>
 						<option value="2011">2011</option>

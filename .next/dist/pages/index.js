@@ -56,7 +56,7 @@ var _header2 = _interopRequireDefault(_header);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/home/apurv/Desktop/BMDB/pages/index.js?entry';
+var _jsxFileName = '/Users/apurv/Desktop/BMDB/pages/index.js?entry';
 
 
 var Counter = function (_React$Component) {
