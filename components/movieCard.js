@@ -32,7 +32,8 @@ class MovieCard extends React.Component {
     }
     //console.log(newList);
     localStorage.setItem("favouriteMovies", JSON.stringify(newList));
-    this.props.handleDisike;
+    console.log('handleDislike()->',this.props);
+    this.props.handleDislike(this.props.movie);
   }
 
   render () {

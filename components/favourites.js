@@ -6,12 +6,21 @@ import MovieCard from '../components/movieCard'
 class Favourites extends React.Component {
 	constructor(props) {
     	super(props);
-    	this.handleDislike = this.handleDislike.bind(this);
+    	this.state = props;
   	}
-  	
-	handleDislike = () => {
-		console.log('Disliked');
-		this.render();
+
+	handleDislike(movieRemove) {
+		console.log('Disliked', this);
+		//this.render();
+		let newList = [];
+		this.state.favouriteMovies.forEach((movie) => {
+			if (movie.id != movieRemove.id) {
+				newList.push(movie);
+			}
+		});
+		this.setState({
+			favouriteMovies: newList
+		});
 	}
 
 	componentWillMount() {
@@ -27,9 +36,9 @@ class Favourites extends React.Component {
 		return (
 			<div>
 				<p>Favourite Movies</p>
-				{this.props.favouriteMovies.map((movie, i) => {
+				{this.state.favouriteMovies.map((movie, i) => {
 					return (
-						<MovieCard movie={movie} key={i} isLiked={this.props.isLiked} handleDislike = {this.handleDislike} />	
+						<MovieCard movie={movie} key={i} isLiked={this.props.isLiked} handleDislike = {this.handleDislike.bind(this)} />	
 					)
 				})}				
 			</div>
