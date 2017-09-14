@@ -10,6 +10,22 @@ import MovieCard from '../components/movieCard'
 
 class HomePage extends React.Component {
 	onFilterChange = (e) => {
+		console.log(e.target.value);
+		let genreId;
+		this.props.genres.forEach((genre) => {
+			if (genre.name === e.target.value) {
+				genreId = genre.id
+			}
+		});
+		let url = `https://api.themoviedb.org/3/genre/${genreId}/movies?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&include_adult=false&sort_by=created_at.asc`;
+		this.props.itemsFetchData(url);
+		this.setState({
+			filterValue: e.target.value,
+			dateValue: 'dateFilter'
+		});
+	}
+
+	/*onFilterChange = (e) => {
 		let value = e.target.value;
 		let url;
 		if (value === 'rating') {
@@ -26,7 +42,7 @@ class HomePage extends React.Component {
 			filterValue: value,
 			dateValue: 'dateFilter'
 		});
-	}
+	}*/
 
 	onDateChange = (e) => {
 		let value = e.target.value;
@@ -45,6 +61,17 @@ class HomePage extends React.Component {
 	}
 
 	render() {
+		console.log(this);
+		let genreFilterOptions = [];
+		this.props.genres.forEach((genre) => {
+			genreFilterOptions.push(<option value={genre.name}>{genre.name}</option>)
+		});
+		let genreFilter = (
+			<select className="select select-filter" onChange={this.onFilterChange} value={this.state ? this.state.filterValue : 'filter'}>
+				<option value="filter" disabled>Filter by Genre</option>
+				{genreFilterOptions}
+			</select>
+		)
 		return (
 			<div className="app">
 				<div className="headerBar">
@@ -55,6 +82,7 @@ class HomePage extends React.Component {
 						<option value="upcoming">Upcoming</option>
 						<option value="nowPlaying">Now Playing</option>
 					</select>
+					{genreFilter}
 					<select className="select select-year" onChange={this.onDateChange} value={this.state ? this.state.dateValue: 'dateFilter'}>
 						<option value="dateFilter" disabled>Filter By Year</option>
 						<option value="2010">2010</option>

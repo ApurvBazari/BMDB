@@ -8,7 +8,6 @@ export const itemsHasErrored = (bool) => dispatch => {
 }
 
 export const itemsIsLoading = (bool) => dispatch => {
-    console.log('Items is laoding!!', bool);
     return dispatch({
         type: 'ITEMS_IS_LOADING',
         isLoading: bool

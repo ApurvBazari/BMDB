@@ -22,7 +22,6 @@ var itemsHasErrored = exports.itemsHasErrored = function itemsHasErrored(bool) {
 
 var itemsIsLoading = exports.itemsIsLoading = function itemsIsLoading(bool) {
     return function (dispatch) {
-        console.log('Items is laoding!!', bool);
         return dispatch({
             type: 'ITEMS_IS_LOADING',
             isLoading: bool
