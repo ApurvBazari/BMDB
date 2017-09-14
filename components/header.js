@@ -16,15 +16,9 @@ class BMDBHeader extends React.Component{
   }
 
   toggleSearch = (e) => {
-    console.log(this.state);
     this.setState({
       search: this.state.search===false ? true : false  
     });
-    this.render();
-  }
-
-  handleSearch = (e) => {
-    console.log(e.target.value)
   }
 
   handleInput = (e) => {
@@ -33,6 +27,11 @@ class BMDBHeader extends React.Component{
       inputValue: e.target.value
     });
     this.props.itemsFetchData(url);
+  }
+
+  handleHomepage = (e) => {
+    let url = 'https://api.themoviedb.org/3/movie/popular?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=${1}';
+    this.props.itemsFetchData(url);    
   }
 
 	render () {
@@ -80,7 +79,7 @@ class BMDBHeader extends React.Component{
           			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
         		</Head>
         		<div className="appHeader">
-          			<img src="/static/logo.png"></img>
+                <Link href="/"><a onClick={this.handleHomepage}><img src="/static/logo.png" onClick={this.handleHomepage}></img></a></Link>
                 {headerData}
         		</div>
         		<style jsx>{`

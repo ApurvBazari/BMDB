@@ -10,8 +10,6 @@ class Favourites extends React.Component {
   	}
 
 	handleDislike(movieRemove) {
-		console.log('Disliked', this);
-		//this.render();
 		let newList = [];
 		this.state.favouriteMovies.forEach((movie) => {
 			if (movie.id != movieRemove.id) {
@@ -32,7 +30,6 @@ class Favourites extends React.Component {
 	}
 
 	render() {
-		console.log(this);
 		return (
 			<div>
 				<p>Favourite Movies</p>

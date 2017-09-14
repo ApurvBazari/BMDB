@@ -11,7 +11,6 @@ import MovieCard from '../components/movieCard'
 class HomePage extends React.Component {
 	onFilterChange = (e) => {
 		let value = e.target.value;
-		console.log('Value:', value);
 		let url;
 		if (value === 'rating') {
 			url = 'https://api.themoviedb.org/3/movie/top_rated?api_key=d115fba9257637e7caf1dbc7a75a11d6&language=en-US&page=1';
@@ -46,7 +45,6 @@ class HomePage extends React.Component {
 	}
 
 	render() {
-		console.log(this.props);
 		return (
 			<div className="app">
 				<div className="headerBar">

@@ -16,11 +16,9 @@ class MovieCard extends React.Component {
     let favouriteMovies = localStorage.getItem("favouriteMovies") ? JSON.parse(localStorage.getItem("favouriteMovies")) : [];
     favouriteMovies[favouriteMovies ? favouriteMovies.length : 0] = this.props.movie;
     localStorage.setItem("favouriteMovies", JSON.stringify(favouriteMovies));
-    console.log(localStorage);
   }
 
   handleDisike = () => {
-    console.log('Dislike', this.props);
     let favouriteMovies =localStorage.getItem('favouriteMovies') ? JSON.parse(localStorage.getItem('favouriteMovies')) : [];
     let newList = [];
     if (favouriteMovies) {
@@ -30,9 +28,7 @@ class MovieCard extends React.Component {
         }
       });
     }
-    //console.log(newList);
     localStorage.setItem("favouriteMovies", JSON.stringify(newList));
-    console.log('handleDislike()->',this.props);
     this.props.handleDislike(this.props.movie);
   }
 

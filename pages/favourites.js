@@ -18,7 +18,6 @@ class Favourite extends React.Component {
 	}
 
 	render() {
-		//console.log(this, this.isServer);
 		return (
 			<div>
 				<BMDBHeader />
