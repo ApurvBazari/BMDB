@@ -25,7 +25,7 @@ class HomePage extends React.Component {
 		});
 	}
 
-	/*onFilterChange = (e) => {
+	onFilter = (e) => {
 		let value = e.target.value;
 		let url;
 		if (value === 'rating') {
@@ -42,7 +42,7 @@ class HomePage extends React.Component {
 			filterValue: value,
 			dateValue: 'dateFilter'
 		});
-	}*/
+	}
 
 	onDateChange = (e) => {
 		let value = e.target.value;
@@ -64,7 +64,7 @@ class HomePage extends React.Component {
 		console.log(this);
 		let genreFilterOptions = [];
 		this.props.genres.forEach((genre) => {
-			genreFilterOptions.push(<option value={genre.name}>{genre.name}</option>)
+			genreFilterOptions.push(<option value={genre.name} key={genre.name}>{genre.name}</option>)
 		});
 		let genreFilter = (
 			<select className="select select-filter" onChange={this.onFilterChange} value={this.state ? this.state.filterValue : 'filter'}>
@@ -75,7 +75,7 @@ class HomePage extends React.Component {
 		return (
 			<div className="app">
 				<div className="headerBar">
-					<select className="select select-filter" onChange={this.onFilterChange} value={this.state ? this.state.filterValue : 'filter'}>
+					<select className="select select-filter" onChange={this.onFilter} value={this.state ? this.state.filterValue : 'filter'}>
 						<option value="filter" disabled>Filter By</option>
 						<option value="popularity">Popularity</option>
 						<option value="rating">Rating</option>
@@ -146,7 +146,7 @@ class HomePage extends React.Component {
 						margin: 21px;
 					}
 				`}</style>
-				</div>
+			</div>
 		)
 	}
 }
